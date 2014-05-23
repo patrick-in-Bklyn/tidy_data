@@ -1,0 +1,29 @@
+Files,Rows,Columns
+1,./UCI HAR Dataset/activity_labels.txt,6,2
+2,./UCI HAR Dataset/features_info.txt,59,2
+3,./UCI HAR Dataset/features.txt,561,2
+4,./UCI HAR Dataset/README.txt,70,1
+5,./UCI HAR Dataset/test/Inertial Signals/body_acc_x_test.txt,2947,128
+6,./UCI HAR Dataset/test/Inertial Signals/body_acc_y_test.txt,2947,128
+7,./UCI HAR Dataset/test/Inertial Signals/body_acc_z_test.txt,2947,128
+8,./UCI HAR Dataset/test/Inertial Signals/body_gyro_x_test.txt,2947,128
+9,./UCI HAR Dataset/test/Inertial Signals/body_gyro_y_test.txt,2947,128
+10,./UCI HAR Dataset/test/Inertial Signals/body_gyro_z_test.txt,2947,128
+11,./UCI HAR Dataset/test/Inertial Signals/total_acc_x_test.txt,2947,128
+12,./UCI HAR Dataset/test/Inertial Signals/total_acc_y_test.txt,2947,128
+13,./UCI HAR Dataset/test/Inertial Signals/total_acc_z_test.txt,2947,128
+14,./UCI HAR Dataset/test/subject_test.txt,2947,1
+15,./UCI HAR Dataset/test/X_test.txt,2947,561
+16,./UCI HAR Dataset/test/y_test.txt,2947,1
+17,./UCI HAR Dataset/train/Inertial Signals/body_acc_x_train.txt,7352,128
+18,./UCI HAR Dataset/train/Inertial Signals/body_acc_y_train.txt,7352,128
+19,./UCI HAR Dataset/train/Inertial Signals/body_acc_z_train.txt,7352,128
+20,./UCI HAR Dataset/train/Inertial Signals/body_gyro_x_train.txt,7352,128
+21,./UCI HAR Dataset/train/Inertial Signals/body_gyro_y_train.txt,7352,128
+22,./UCI HAR Dataset/train/Inertial Signals/body_gyro_z_train.txt,7352,128
+23,./UCI HAR Dataset/train/Inertial Signals/total_acc_x_train.txt,7352,128
+24,./UCI HAR Dataset/train/Inertial Signals/total_acc_y_train.txt,7352,128
+25,./UCI HAR Dataset/train/Inertial Signals/total_acc_z_train.txt,7352,128
+26,./UCI HAR Dataset/train/subject_train.txt,7352,1
+27,./UCI HAR Dataset/train/X_train.txt,7352,561
+28,./UCI HAR Dataset/train/y_train.txt,7352,1

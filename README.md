@@ -2,7 +2,7 @@ tidy_data
 =========
 
 ###tidy data set and code for extracting and cleaning data.
-## Program to get and clean up data for data specialization 
+# Program to get and clean up data for data specialization 
         begin with the saved data in the files as they were unzipped from 
                 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
         these files were unzipped into a directory named zip_files created to hold #$ONLY$# the unzipped files. 
@@ -17,7 +17,8 @@ tidy_data
 
         Do this manually in the first section of the code. 
         
-#Generate the tidy data set which shows the mean and std of each variable by subject and activity. Re-label rows and columns in line with good data science practice. 
+#Generate the tidy data set 
+        which shows the mean and std of each variable by subject and activity. Re-label rows and columns in line with good data science practice. 
 
         1. merge the data sets in the train.txt file with the test.txt file
         2. identify the wanted columns using features.txt and the "mean()" and "std()" as parameters
@@ -35,7 +36,8 @@ tidy_data
         12. use a rbind() function to attach the "wanted" data set to the reformatted column array. 
         13. return this final array. 
         
-# Generate a data.frame of the variable means by activity and by user, savt to tidy_means.txt:
+# Generate a data.frame 
+        of the variable means by activity and by user, savt to tidy_means.txt:
 
         a. create the activity code and the subject row_headers columns. These are just arrays (1:6, and 1:30 respectively)
         b. use the activity code column to generate the activity labels column. add colnames to this array. 

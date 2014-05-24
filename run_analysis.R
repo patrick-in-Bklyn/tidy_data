@@ -87,45 +87,53 @@ run_analysis <- function()
         ##      6. Save the table to the parent directory of the working directory as a txt file. 
         
         write.table(final_table, file = "../tidy.txt", quote = FALSE, sep = " ");
+        write.table(head(final_table, 20)[, 1:30]);
+        ## Begin work on generating table of the means of every variable by activity and subject. 
         
-        ##      7. start working on the means of each variable in the original data set.
-        
-        ##      begin by setting up an array of activity codes( 1:6) and subjects (1:30). Attach the activity names column to this
+        # a. Set up the row headers an array of 180 rows and 2 columns . 
+        # Column 1 reprats activity codes 1 to 6 for 30 times, column 2 repeats subject codes 1:30 by six times. 
+        # cbind the activities to the 180 x 2 array to get activity names. 
         
         act_codes <- 1:6; subj <- 1:30;
         num_cols <- unlist(lapply(act_codes, function(x) rep(x, length.out = length(subj))));
         active_col <- add_labels(num_cols, activity_labels);
         row_heads <- as.data.frame(cbind(active_col, as.numeric(num_cols), as.numeric(subj)));
+        
+        #name these three columns. 
         colnames(row_heads) <- c("activity", "activity.code", "subject");
         
-        ##      get the original files again, reformat the column titles and bind the columns and data to make one frame. 
+        # begin work on the body of the means table by calling the data tables and the column names. 
+        # merge the data tables and reformat the columns. 
         means_cols <- read.table(column_names)[,2];
         means_cols <- sapply(means_cols, function(x) format_cols(x))
         
         means_body <- merge_set(table_body_file1, table_body_file2);
         
+
+        means_cols <- sapply(means_cols, function(x) rename_means_cols(x));
         colnames(means_body) <- means_cols;
         
         means_body <- cbind(row_data, means_body);
         
-        ## subset the data by activity and then by user and calculate the mean for each subset.
+        #subset the body of the table by activity code and then by user and generate the mean of each column
         
         means_table <- apply(row_heads, 1, function(x) get_means(means_body, x["activity.code"], x["subject"]));
-        means_cols <- sapply(means_cols, function(x) rename_means_cols(x));
         
-        ## transpose the frame to wide and bind it to the row headers to make the final frame
+        # reshape the resulting table and bind with the row_headers (the three columns created at the beginning. )
         means_table <- t(means_table);
         means_table <- cbind(row_heads, means_table);
-        
-        ## write the table to the tidy_means.txt file and save it in the parent directory.
+        # save down the file. 
         
         write.table(means_table, file = "../tidy_means.txt", quote = FALSE, sep = " ");
         
-
-        ##################### FUNCTIONS START HERE ####################################
-
+        write.table(head(means_table, 15)[1:15], file = "../segment_tidy_means.txt", quote = FALSE, sep = " ");
         
-        investigate_files <- function(dir = ".") ## opens each file and counts rows and columns, saves the result in parent directory.
+
+        ################         FUNCTIONS BEGIN HERE ################################
+        
+        investigate_files <- function(dir = ".") 
+                
+                # opens files and gets dimensions ncol and nrow of each file 
                 {
                 file_list <- list.files(dir, recursive = TRUE)
                 files <- lapply(file_list, function(x) paste("./", x, sep = "", collapse = "/"))
@@ -141,22 +149,25 @@ run_analysis <- function()
                 return(description);
         
                 }
-
-        merge_set <- function(x,y) ## merges two files
+        
+        merge_set <- function(x,y)
+                # merges tables.
                 {
                 file_1 <- read.table(x, nrows =-1);
                 merged_set <- rbind(file_1, read.table(y));
                 return(merged_set);
                 }
         
-        find_wanted_cols <- function(file, key1, key2) ## filters the columns according to the key words supplied
+        find_wanted_cols <- function(file, key1, key2)
+                #finds the columns we want for the main return table
                 {
                 array <- read.table(file)[,2];
                 want_cols <- sapply(array, function(x) (key1 %in% unlist(strsplit(as.character(x), "-"))) || (key2 %in% unlist(strsplit(as.character(x), "-"))));
                 return(which(want_cols))
                 }
 
-        add_labels <- function(y,z) ## creates a properly formatted column of activity labels
+        add_labels <- function(y,z)
+                # Adds activity name labels to rows
                 {
                 row_names <- y;
                 act_labels <- read.table(as.character(z));
@@ -166,7 +177,9 @@ run_analysis <- function()
         
                 }
 
-        format_act_labels <- function(x) ## helper function to add_labels. It formats the labels
+        format_act_labels <- function(x)
+                # Helper function to put activity labels in lower case.
+                
                 {
                 start_str <- unlist(strsplit(as.character(x), ""));
         
@@ -181,32 +194,39 @@ run_analysis <- function()
                 }
 
 
-        format_cols <- function(x) ## re-formats the columns to meet tidy data principals.
+        format_cols <- function(x)
+                ## strips apart column names, removes parenthesis and adds a dot instead of a capital letter. 
                 {
                 start <- unlist(strsplit(as.character(x), "-"));
-                if ("mean()" %in% start) {start[which(start == "mean()")] <- "Mean";}
-                if("std()" %in% start) {start[which(start == "std()")] <- "Std";}
+                start <- unlist(lapply(start, function(x) gsub("\\()$", "", x)));
+                start_a <- start[2:length(start)]; 
+                start_b <- unlist(lapply(start_a, function(x) paste(toupper(substring(x,1,1)), substring(x,2), sep = "", collapse = "")));
+                 start <- c(start[1], start_b);
                 start <- paste(start, sep = " ", collapse = "");
                 next_step <- unlist(strsplit(start, ""))
-        
+                
+
                 replace_caps <- function(x){ if (x %in% LETTERS){x <- paste(".", tolower(x), sep = "", collapse = "")}else{x}}
-        
-                final <- paste(sapply(next_step, replace_caps), sep = "", collapse = "")
+
+                final <- paste(sapply(next_step, replace_caps), sep = "", collapse = "");
+                
                 return(final);
                 }
 
         
 
         
-        get_means <- function(frame, x, y) # subsets the frame according to activity and subject and calculates column means.
+        get_means <- function(frame, x, y)
+                # basic colMeans function on the data portion of the main table.
                 {
                 subset <- subset(frame, activity.code == x & subject == y, drop = TRUE); 
                 return(colMeans(subset[,4:ncol(frame)]));
                 }
-        rename_means_cols <- function(x) # changes the column titles to reflect that there are means of raw data.
+        rename_means_cols <- function(x)
                 {
-                return(paste("mean.of.", x, sep = "", collapse = ""));
+                return(paste("mean.", x, sep = "", collapse = ""));
                 
                 }
-        return(final_table);
+        write.table(head(final_table, 15)[1:15], file = "../segment_tidy_means.txt", quote = FALSE, sep = " ");
+        return(head(final_table, 15)[1:15];
         }

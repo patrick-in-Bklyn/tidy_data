@@ -35,7 +35,7 @@ run_analysis <- function()
         {
         ## check the files are in the current working directory
         
-        if (dir(getwd()) != "UCI HAR Dataset"){ stop("your working directory is not set to the Zip files you downloaded.");}
+        if (!("UCI HAR Dataset" %in% dir(getwd()))){ stop("your working directory is not set to the Zip files you downloaded.");}
         
         ## if they are get a list containing the names, No of rows and No. of cols in each file.
         
@@ -93,12 +93,22 @@ run_analysis <- function()
         active_col <- add_labels(num_cols, activity_labels);
         row_heads <- as.data.frame(cbind(active_col, as.numeric(num_cols), as.numeric(subj)));
         colnames(row_heads) <- c("activity", "activity.code", "subject");
+        means_cols <- read.table(column_names)[,2];
+        means_cols <- sapply(means_cols, function(x) format_cols(x))
         
-        means_body <- apply(row_heads, 1, function(x) get_means(final_table, x["activity.code"], x["subject"]));
-        means_body <- t(means_body);
-        colnames(means_body) <- sapply(colnames(means_body), function(x) rename_means_cols(x));
+        means_body <- merge_set(table_body_file1, table_body_file2);
         
-        means_table <- cbind(row_heads, means_body);
+        colnames(means_body) <- means_cols;
+        
+        means_body <- cbind(row_data, means_body);
+        
+        means_table <- apply(row_heads, 1, function(x) get_means(means_body, x["activity.code"], x["subject"]));
+        
+
+        
+        means_cols <- sapply(means_cols, function(x) rename_means_cols(x));
+        means_table <- t(means_table);
+        means_table <- cbind(row_heads, means_table);
         
         write.table(means_table, file = "../tidy_means.txt", quote = FALSE, sep = " ");
         

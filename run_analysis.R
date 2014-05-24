@@ -227,6 +227,6 @@ run_analysis <- function()
                 return(paste("mean.", x, sep = "", collapse = ""));
                 
                 }
-        write.table(head(final_table, 15)[1:15], file = "../segment_tidy_means.txt", quote = FALSE, sep = " ");
-        return(head(final_table, 15)[1:15];
+        write.table(head(final_table, 15)[1:15], file = "../segment_tidy.txt", quote = FALSE, sep = " ");
+        return(head(final_table, 15)[1:15]);
         }

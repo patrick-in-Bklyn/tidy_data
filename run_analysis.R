@@ -16,39 +16,34 @@
 ## feed these to the functions in the following order
 
 ## 1. merge the data sets in the train.txt file with the test.txt file
-## 2. identify the wanted columns using features.txt and the "mean()" and 
-##                                                      "std()" as parameters
-## 3. subset the merged data set to get the wanted data using a simple 
-                                        ##[wanted] suffix to the select statement.
+
+## 3. subset the merged data set to get the wanted data
+
 ## 3. take the activity_labels.txt file and reformat the 2nd column to meet good 
-                                ##R standards (lower case and dot separated words)
-## 4. merge the trial_y and test_y files to get the activity codes in the correct order.
-## 5. use an lapply function to create a vector of activity names that is the same 
-##                                              length as the merged trial_y and test_Y data set
-## 6. use cbind() to create an array of activity codes in one 
-##                                              column and activity name in another. 
+#                       R standards (lower case and dot separated words)
+## 4. merge the trial_y and test_y files to get the activity codes.
+## 5. create a vector of activity names to align with trial_y and test_Y data
+## 6. use cbind() to create an array called activity array. 
 ## 7. bind the large "wanted" data set with the activity array.
 ## 8. Move on to reformatting and binding the columns
 ## 9. load the wanted subset of the column names (features.txt) into an array.
-## 10. replace -mean()- and -std()- with Mean and Std respectively. 
-## 11. Then search for capital letters and replace these with a dot and a lower case version 
-##              of the same letter. replace any "-" symbols with a dot too. Remove parentheses.
-## 12. use a rbind() function to attach the "wanted" data set to the reformatted column array. 
+## 10. replace "-" and "()" and -std()- characters.
+## 12. end up with x.xxxx.xxxx.x type name convention
 ## 13. return this final array. 
 
 ## 14. Move on to getting averages
-##      a. create the activity code and the subject row_headers columns. These are just arrays 
-##                                                              (1:6, and 1:30 respectively)
-##      b. use the activity code column to generate the activity labels column. 
-##                                                              add colnames to this array. 
-##      c. take the final table generated in the main function and subset out by 
-##                                                              activity and then by user.
-##      d. get the colmeans on each column in this subset.
+##      a. create the activity code and the subject row_headers columns. 
+##      These are just arrays  (1:6, and 1:30 respectively)
+##                                                             
+##      b.generate the activity.labels, activity.code and subject column array.
+##                                                               
+##      c. subset the merged original data set by activity and then by user.
+##      d. get the colMeans on each column in this subset.
 ##      e. pin together these colmeans with an apply function
 ##      f. use a cbind command to attach the colmeans to the row headers.
 ##      g. rename the column headers to reflect that these are the mean of variables 
-                                                                ## extracted from the final table. 
-##      h. write that table down to a "tidy_means.txt" file and save it in the paren directory. 
+                                                               
+##      h. write the table of means to a "tidy_means.txt" file and save it in the paren directory. 
 
 
 run_analysis <- function()

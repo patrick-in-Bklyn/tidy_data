@@ -2,9 +2,9 @@
 ##                                                                                       ####
 ##                                      run_analysis()                                   ####
 ##                              A program to get and clean up data                       ####
-##                              JHU/Coursera Data Specialization                         ####
-##                                                                                       ####
-##                                 CODE STARTS ON LINE 49.                               ####
+##                              JHU/Coursera Data Scientist Specializat                  ####
+##                                   Getting and Cleaning Dat                            ####
+##                                   CODE STARTS ON LINE 49.                             ####
 ##                                                                                       ####
 ##                              by Patrick - in - Bklyn                                  ####
 #############################################################################################
@@ -27,8 +27,8 @@
 ## 7. bind the large "wanted" data set with the activity array.
 ## 8. Move on to reformatting and binding the columns
 ## 9. load the wanted subset of the column names (features.txt) into an array.
-## 10. replace "-" and "()" and -std()- characters.
-## 12. end up with x.xxxx.xxxx.x type name convention
+## 10. reformat column names to meet good R standards
+## 12. Change column labels to  x.xxxx.xxxx.xxx.x type name convention
 ## 13. return this final array. 
 
 ## 14. Move on to getting averages
@@ -43,7 +43,7 @@
 ##      f. use a cbind command to attach the colmeans to the row headers.
 ##      g. rename the column headers to reflect that these are the mean of variables 
                                                                
-##      h. write the table of means to a "tidy_means.txt" file and save it in the paren directory. 
+##      h. write the table of means to a "tidy_means.txt" file and save it in the parent directory. 
 
 
 run_analysis <- function()

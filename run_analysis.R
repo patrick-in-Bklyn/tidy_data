@@ -4,7 +4,7 @@
 ##                              A program to get and clean up data                       ####
 ##                              JHU/Coursera Data Specialization                         ####
 ##                                                                                       ####
-##                                 CODE STARTS ON LINE 54.                               ####
+##                                 CODE STARTS ON LINE 49.                               ####
 ##                                                                                       ####
 ##                              by Patrick - in - Bklyn                                  ####
 #############################################################################################

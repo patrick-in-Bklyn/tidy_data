@@ -10,7 +10,7 @@ tidy_data
         
         files were unzipped to a directory named zip_files.
         
-        The directory should hold **ONLY** the unzipped files. 
+        The directory should hold __**ONLY**__ the unzipped files. 
         
         change the working directory in the evnironment to zip_files. 
         
@@ -21,8 +21,11 @@ tidy_data
         This site provides a full description of the experiments done, the variables measured
         and the organization of the data. 
         
-        **Refer to this site to understand the tables**. 
-        
+        __**Refer to this site to understand the tables**__
+
+####Copy the program and each sub function into your environment.
+        The functions under the main run_analysis function must
+        be copied into your environment separately. 
         
 ####Run the investigate_files function. 
 
@@ -38,12 +41,13 @@ tidy_data
 ####    Save this file to "../tidy.txt"
 
         1. merge the data sets in the train.txt file with the test.txt file
-        2. Subset the arrays according to column names (names contain mean() and std()).
+        2. Subset the arrays according to column names (key words are mean() and std()).
         3. if a different filter is needed you can change the key_word1 and key_word2 parameters. 
         4. reformat the labels within the original data to meet good R practice.
         5. Naming conventions were kept as close to the original as possible.
 
-                        tBodyAcc-mean()-X was transformed to t.body.acc.mean.x
+        for columns:    tBodyAcc-mean()-X was transformed to t.body.acc.mean.x
+        for rows:       WALKING_DOWNSTAIRS was transformed to walking.downstairs
                         
         7. This final array has 10,299 rows and 69 columns.
         8. The array is saved to a file entitled tidy.txt in the parent directory. 
@@ -54,15 +58,20 @@ tidy_data
         
         1. Take the merged data from the train.txt and test.txt files.
         2. filter the data sucessively by subject and then by activity
-        3. calculate the mean of each column in the subset. create a frame of all means. 
-        4. resulting table has dimensions of 180 rows x 564 columns
-        5. the first 3 columns are name columns (activity, activity.code and subject)
-        6. there are 561 columns of output data.
-        7. naming here was to add the word mean to each re-formatted variable
+        3. calculate the mean of each column in the subset. 
+        4. take original variables.txt file and reformat to R standard.
         
-                "tBodyAcc-mean()-X" was transformed to "mean.t.body.acc.mean.x"
-                
-        8. This array is saved to a file entitled "tidy_means.txt" in the parent dir.     
+        4. create a frame of all subset means and bind to row_names.  
+        5. The first 3 columns of this frame are titles for row names 
+                (activity, activity.code and subject)
+        6. there are 561 columns of output data.
+
+        
+        columns:        "tBodyAcc-mean()-X" was transformed to "mean.t.body.acc.mean.x"
+        Rows            WALKING_DOWNSTAIRS was transformed to walking.downstairs
+        
+        8. resulting table has dimensions of 180 rows x 564 columns                
+        9. This array is saved to a file entitled "tidy_means.txt" in the parent dir.     
         
         
         
